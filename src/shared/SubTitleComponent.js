@@ -21,7 +21,7 @@ const SubTitleStyle = styled.div`
     font-size: 20px;
     display: flex;
     justify-content: space-between;
-    margin: 30px 10px;
+    margin: 20px 10px;
     font-family: 'Press Start 2P', cursive;
     font-weight: 700;
 `

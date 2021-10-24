@@ -7,6 +7,7 @@ import { loadBoxServer } from "../service";
 import { useEffect } from "react";
 import SubTitleComponent from "../shared/SubTitleComponent";
 import ItemComponent from "../shared/ItemComponent";
+import MainButtonsComponent from "../shared/MainButtonsComponent";
 
 
 export default function MainPage () {
@@ -61,15 +62,17 @@ export default function MainPage () {
                     return(
                         <ItemComponent item={item}></ItemComponent>
                     )
-                    
                 })}
             </BoxListStyle>
             <TotalStyle>
                 <p>Total:</p>
                 <TotalBoxStyle isProfit={true}>{Math.abs(totalCalculation()).toFixed(2)}</TotalBoxStyle>
             </TotalStyle>
-            
         </WhiteBoardStyle>
+        <ButtonsSpacStyle>
+            <MainButtonsComponent type={'entrada'}></MainButtonsComponent>
+            <MainButtonsComponent type={'saida'}></MainButtonsComponent>
+        </ButtonsSpacStyle>
         </>
     )
 }
@@ -80,7 +83,7 @@ const WhiteBoardStyle = styled.div`
     padding: 20px;
     margin: auto;
     font-size: 20px;
-    height: 65vh;
+    height: calc(65vh - 30px);
     position:relative;
 `
 const BoxListStyle = styled.ul`
@@ -100,4 +103,10 @@ const TotalStyle = styled.div`
 `
 const TotalBoxStyle = styled.p`
     color: ${props => props.isProfit? 'green' : 'red'}
+`
+
+const ButtonsSpacStyle = styled.div`
+   display: flex;
+   justify-content:space-between;
+   margin-top: 20px;
 `
