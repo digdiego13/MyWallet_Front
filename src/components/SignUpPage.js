@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import {SignUpOrLoginButtonStyled, SignUpOrLoginInputStyled, SwitchSignUpLoginLinkStyled} from '../shared/sharedStyles';
 import UserContext from "../contexts/UserContext";
 import AppTitleComponent from "../shared/AppTitleComponent";
+import { postSignUp } from "../service";
 
 export default function SignUpPage() {
 
@@ -19,7 +20,32 @@ export default function SignUpPage() {
     function userSignUp (event){
 
         event.preventDefault();
+
+        if(password !== passwordConfirm) {
+            alert("The confirmation password must be the same as ur password");
+            return
+        }
+
         const body = {email, password, username}
+        setIsLoading(true);
+
+        postSignUp(body)
+            .then((response) => {
+                setIsLoading(false);
+                history.push('/');
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                if (err.response.status === 403){
+                    alert ('O e-mail inserido já está cadastrado.');
+                }
+                else if (err.response.status === 500){
+                    alert ('Erro de servidor');
+                }
+                else{
+                    alert ('Erro ao realizar cadastro');
+                }
+            });
 
     }
 
@@ -51,7 +77,7 @@ export default function SignUpPage() {
                 <SignUpOrLoginInputStyled 
                     type="password" 
                     placeholder="Confirm ur password"
-                    value={password}
+                    value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                     required
                 />

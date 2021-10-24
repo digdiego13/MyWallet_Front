@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from './components/loginPage';
 import SignUpPage from './components/SignUpPage';
+import MainPage from './components/MainPage';
 import UserContext from './contexts/UserContext';
 import { useState } from 'react';
 
@@ -21,6 +22,11 @@ function App() {
         <Switch>
           <Route path="/sign-up" exact>
             <SignUpPage />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/main" exact>
+            <MainPage />
           </Route>
         </Switch>
       </BrowserRouter>

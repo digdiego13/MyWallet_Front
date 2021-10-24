@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import {SignUpOrLoginButtonStyled, SignUpOrLoginInputStyled, SwitchSignUpLoginLinkStyled} from '../shared/sharedStyles';
 import UserContext from "../contexts/UserContext";
 import AppTitleComponent from "../shared/AppTitleComponent";
+import { postLogin } from "../service";
 
 
 export default function LoginPage() {
@@ -18,31 +19,37 @@ export default function LoginPage() {
 
         event.preventDefault();
         const body = {email, password}
-        //setIsLoading(true);
-        setUser(
-            {name: "Diego",
-            email: "oioi@gmail.com",
-            token: "abc"
-            }
-        )
-        // postLogin(body)
-        //     .then((response) => {
-        //         setIsLoading(false);
-        //         setUser({token: response.data.token, id: response.data.user.id, image: response.data.user.avatar, username: response.data.user.username});
-        //         const serializedUser = JSON.stringify({token: response.data.token, id: response.data.user.id, image: response.data.user.avatar, username: response.data.user.username});
-        //         localStorage.setItem('storedUser', serializedUser);
+        setIsLoading(true);
+        
+        postLogin(body)
+             .then((response) => {
+                 setIsLoading(false);
+                 setUser(
+                        {
+                            token: response.data.token, 
+                            name: response.data.user.name
+                        }
+                    );
+                 const serializedUser = JSON.stringify( {
+                    token: response.data.token, 
+                    name: response.data.user.name
+                });
+                 localStorage.setItem('storedUser', serializedUser);
 
-        //         history.push('/timeline');
-        //     })
-        //     .catch((err) => {
-        //         setIsLoading(false);
-        //        if (err.response.status === 500){
-        //             alert ('Erro de servidor');
-        //         }
-        //         else{
-        //             alert ('E-mail/senha incorretos');
-        //         }
-        //     });
+                 history.push('/main');
+             })
+             .catch((err) => {
+                 setIsLoading(false);
+                if (err.response.status === 500){
+                     alert ('Erro de servidor');
+                 }
+                 else if(err.response.status === 403){
+                     alert ('E-mail/senha incorretos');
+                 }
+                 else{
+                     alert("Problema no servidor")
+                 }
+             });
     
     }
 
