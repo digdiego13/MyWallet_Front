@@ -17,9 +17,14 @@ function postSignUp (body){
     return promise;
 }
 
+function loadBoxServer (token){
+    const promise = axios.get(`${URL}/main`, createHeaders(token));
+    return promise;
+}
 
 
 export {
     postLogin,
-    postSignUp
+    postSignUp,
+    loadBoxServer
 }

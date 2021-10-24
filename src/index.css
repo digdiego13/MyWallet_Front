@@ -53,4 +53,5 @@ body{
   padding: 20px 35px;
   margin: auto;
   background-color: brown;
+	box-sizing: border-box;
 }

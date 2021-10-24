@@ -27,12 +27,12 @@ export default function LoginPage() {
                  setUser(
                         {
                             token: response.data.token, 
-                            name: response.data.user.name
+                            name: response.data.name
                         }
                     );
                  const serializedUser = JSON.stringify( {
                     token: response.data.token, 
-                    name: response.data.user.name
+                    name: response.data.name
                 });
                  localStorage.setItem('storedUser', serializedUser);
 
@@ -40,6 +40,7 @@ export default function LoginPage() {
              })
              .catch((err) => {
                  setIsLoading(false);
+                 console.log(err)
                 if (err.response.status === 500){
                      alert ('Erro de servidor');
                  }
