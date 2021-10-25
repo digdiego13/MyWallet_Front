@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import SubTitleComponent from "../shared/SubTitleComponent";
 import ItemComponent from "../shared/ItemComponent";
 import MainButtonsComponent from "../shared/MainButtonsComponent";
+import { useRef } from "react";
 
 
 export default function MainPage () {
@@ -16,6 +17,14 @@ export default function MainPage () {
     const [box, setBox] = useState([]);
     const [loading, setLoading] = useState(true);
     const history = useHistory();
+    const listEndRef = useRef(null);
+
+    
+
+    function scrollIntoBotton () {
+        listEndRef.current.scrollIntoView({behavior: 'smooth'})
+    }
+    
 
 
     function totalCalculation () {
@@ -37,15 +46,23 @@ export default function MainPage () {
             setBox(res.data);
             console.log(res.data);
             setLoading(false);
+            scrollIntoBotton()
             
         })
         .catch((err)=> {
+            history.push('/');
             setLoading(false)
-            alert("server problem")})
+            alert(err.response.data);
+        })
     }
 
     useEffect(() => {
+        if(!user) {
+            history.push("/")
+            return("")
+        }
         loadBox()
+        
     }, [])
 
     if(loading) {
@@ -64,6 +81,7 @@ export default function MainPage () {
                     )
                 })}
             </ul>
+            <div ref={listEndRef}></div>
         </WhiteBoardStyle>
         <TotalStyle>
                 <p>Total:</p>

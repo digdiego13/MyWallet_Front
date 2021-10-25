@@ -3,6 +3,7 @@ import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { useHistory } from "react-router";
+import { postLogout } from "../service";
 
 
 export default function SubTitleComponent({text, icon}) {
@@ -11,9 +12,19 @@ export default function SubTitleComponent({text, icon}) {
     const history = useHistory();
 
     function logOut () {
-        localStorage.clear()
-        setUser({})
-        history.push('/');
+
+        postLogout(user.token)
+        .then(res => {
+            history.push('/');
+            localStorage.clear()
+            setUser({})
+            
+        })
+        .catch(err => {
+            alert("token invalido");
+            history.push('/');
+        })
+        
     }
     
     return(

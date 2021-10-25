@@ -27,6 +27,12 @@ function newTransaction (type, token, body){
     return promise;
 }
 
+function postLogout (token){
+    const promise = axios.post(`${URL}/sign-out`, {},createHeaders(token));
+    return promise;
+}
+
+
 
 
 
@@ -34,5 +40,6 @@ export {
     postLogin,
     postSignUp,
     loadBoxServer,
-    newTransaction
+    newTransaction,
+    postLogout
 }

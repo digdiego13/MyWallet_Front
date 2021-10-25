@@ -11,7 +11,13 @@ export default function Profit () {
     const [value, setValue] = useState('');
     const [description, setDescription] = useState('');
     const {user} = useContext(UserContext);
-    const token = user.token;
+    const token = user?.token;
+    const history = useHistory();
+
+    if(!user) {
+        history.push("/")
+        return(<h1>Loading</h1>)    
+    }
 
 
     function saveTransaction (event) {
@@ -26,7 +32,10 @@ export default function Profit () {
             setDescription("");
         })
         .catch((err) => {
-            alert("Something went wrong")
+            alert(err.response.data);
+            if(err.response.status === 401) {
+                history.push('/');
+            }
         })
 
     }

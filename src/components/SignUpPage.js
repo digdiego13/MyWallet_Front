@@ -43,7 +43,7 @@ export default function SignUpPage() {
                     alert ('Erro de servidor');
                 }
                 else{
-                    alert ('Erro ao realizar cadastro');
+                    alert(err.response.data);
                 }
             });
 
