@@ -5,7 +5,6 @@ import { FiLogOut } from "react-icons/fi";
 import { useHistory } from "react-router";
 import { postLogout } from "../service";
 
-
 export default function SubTitleComponent({text, icon}) {
 
     const {user, setUser} = useContext(UserContext);
@@ -16,7 +15,7 @@ export default function SubTitleComponent({text, icon}) {
         postLogout(user.token)
         .then(res => {
             history.push('/');
-            localStorage.clear()
+            localStorage.clear();
             setUser({})
             
         })
@@ -26,7 +25,6 @@ export default function SubTitleComponent({text, icon}) {
         })
         
     }
-    
     return(
         <SubTitleStyle>
             <h2>{text}</h2>

@@ -18,7 +18,6 @@ export default function Spending () {
         history.push("/")
         return(<h1>Loading</h1>)
     }
-
     function saveTransaction (event) {
         event.preventDefault();
         const body = {
@@ -36,7 +35,6 @@ export default function Spending () {
                 history.push('/');
             }
         })
-
     }
 
     return(
@@ -71,10 +69,7 @@ export default function Spending () {
                     </SignUpOrLoginButtonStyled>
                 </ButtonsStyle>
         </form>
-        
-        
-        </>
-        
+        </> 
     )
 }       
 

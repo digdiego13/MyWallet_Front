@@ -1,53 +1,39 @@
 import styled from "styled-components";
-import { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useContext, useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
-import AppTitleComponent from "../shared/AppTitleComponent";
 import { loadBoxServer } from "../service";
-import { useEffect } from "react";
 import SubTitleComponent from "../shared/SubTitleComponent";
 import ItemComponent from "../shared/ItemComponent";
 import MainButtonsComponent from "../shared/MainButtonsComponent";
-import { useRef } from "react";
-
 
 export default function MainPage () {
 
-    const {user, setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [box, setBox] = useState([]);
     const [loading, setLoading] = useState(true);
     const history = useHistory();
     const listEndRef = useRef(null);
 
-    
-
     function scrollIntoBotton () {
         listEndRef.current.scrollIntoView({behavior: 'smooth'})
     }
-    
-
 
     function totalCalculation () {
         let total = 0;
-        box.map(item => {
-            
+        box.map(item => { 
            total+= Number(item.box);
         })
-       
         return (total)
-
     }
 
     function loadBox() {
 
         loadBoxServer(user.token)
         .then((res)=> {
-
             setBox(res.data);
-            console.log(res.data);
             setLoading(false);
             scrollIntoBotton()
-            
         })
         .catch((err)=> {
             history.push('/');
@@ -55,7 +41,6 @@ export default function MainPage () {
             alert(err.response.data);
         })
     }
-
     useEffect(() => {
         if(!user) {
             history.push("/")
@@ -64,7 +49,6 @@ export default function MainPage () {
         loadBox()
         
     }, [])
-
     if(loading) {
         return (
             <p>Loading</p>
@@ -75,9 +59,9 @@ export default function MainPage () {
         <SubTitleComponent text={`Hello, ${user.name.split(" ")[0]}`} icon={true}></SubTitleComponent>
         <WhiteBoardStyle>
             <ul>
-                {box.map(item => {
+                {box.map((item, index) => {
                     return(
-                        <ItemComponent item={item}></ItemComponent>
+                        <ItemComponent item={item} key={index}></ItemComponent>
                     )
                 })}
             </ul>

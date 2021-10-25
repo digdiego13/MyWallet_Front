@@ -6,7 +6,6 @@ import UserContext from "../contexts/UserContext";
 import AppTitleComponent from "../shared/AppTitleComponent";
 import { postLogin } from "../service";
 
-
 export default function LoginPage() {
 
     const [isLoading, setIsLoading] = useState(false);
@@ -22,38 +21,35 @@ export default function LoginPage() {
         setIsLoading(true);
         
         postLogin(body)
-             .then((response) => {
-                 setIsLoading(false);
-                 setUser(
-                        {
-                            token: response.data.token, 
-                            name: response.data.name
-                        }
-                    );
-                 const serializedUser = JSON.stringify( {
+            .then((response) => {
+                setIsLoading(false);
+                setUser(
+                    {
+                        token: response.data.token, 
+                        name: response.data.name
+                    }
+                );
+                const serializedUser = JSON.stringify( {
                     token: response.data.token, 
                     name: response.data.name
                 });
-                 localStorage.setItem('storedUser', serializedUser);
 
-                 history.push('/main');
-             })
-             .catch((err) => {
-                 setIsLoading(false);
-                 console.log(err)
+                localStorage.setItem('storedUser', serializedUser);
+                history.push('/main');
+            })
+            .catch((err) => {
+                setIsLoading(false);
                 if (err.response.status === 500){
-                     alert ('Erro de servidor');
-                 }
-                 else if(err.response.status === 403){
-                     alert ('E-mail/senha incorretos');
-                 }
-                 else{
-                     alert("Problema no servidor")
-                 }
-             });
-    
+                    alert ('Erro de servidor');
+                }
+                else if(err.response.status === 403){
+                    alert ('E-mail/senha incorretos');
+                }
+                else{
+                    alert("Problema no servidor")
+                }
+            });
     }
-
     return (
         <LoginDataContainerStyled onSubmit={userLogin}>
             <AppTitleComponent></AppTitleComponent>
@@ -86,7 +82,6 @@ export default function LoginPage() {
                 </Link>
         </LoginDataContainerStyled>
     )
-
 }
 
 const LoginDataContainerStyled = styled.form`

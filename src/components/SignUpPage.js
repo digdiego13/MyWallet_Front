@@ -1,13 +1,11 @@
 import styled from "styled-components";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {SignUpOrLoginButtonStyled, SignUpOrLoginInputStyled, SwitchSignUpLoginLinkStyled} from '../shared/sharedStyles';
-import UserContext from "../contexts/UserContext";
 import AppTitleComponent from "../shared/AppTitleComponent";
 import { postSignUp } from "../service";
 
 export default function SignUpPage() {
-
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,7 +13,6 @@ export default function SignUpPage() {
     const [username, setUsername] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
-
 
     function userSignUp (event){
 
@@ -25,7 +22,6 @@ export default function SignUpPage() {
             alert("The confirmation password must be the same as ur password");
             return
         }
-
         const body = {email, password, username}
         setIsLoading(true);
 
@@ -46,9 +42,7 @@ export default function SignUpPage() {
                     alert(err.response.data);
                 }
             });
-
     }
-
 
     return(
         <SignUpDataContainerStyled onSubmit={userSignUp}>

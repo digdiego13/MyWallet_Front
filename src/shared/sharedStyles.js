@@ -16,7 +16,6 @@ const SignUpOrLoginInputStyled = styled.input`
         color: #9F9F9F;
     }
 `
-
 const SignUpOrLoginButtonStyled = styled.button`
     background-color: ${props => props.back === 'login'? `#1877F2`: `${props.back}`};
     height: 65px;
@@ -34,7 +33,6 @@ const SignUpOrLoginButtonStyled = styled.button`
     }
     
 `
-
 const SwitchSignUpLoginLinkStyled = styled.p`
     color: #FFF;
     font-family: 'Lato', sans-serif;
@@ -42,7 +40,6 @@ const SwitchSignUpLoginLinkStyled = styled.p`
     text-decoration: underline;
      
 `
-
 export {
     SignUpOrLoginButtonStyled,
     SignUpOrLoginInputStyled,

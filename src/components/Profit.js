@@ -19,7 +19,6 @@ export default function Profit () {
         return(<h1>Loading</h1>)    
     }
 
-
     function saveTransaction (event) {
         event.preventDefault();
         const body = {
@@ -37,7 +36,6 @@ export default function Profit () {
                 history.push('/');
             }
         })
-
     }
 
     return(
@@ -72,10 +70,7 @@ export default function Profit () {
                     </SignUpOrLoginButtonStyled>
                 </ButtonsStyle>
         </form>
-        
-        
-        </>
-        
+        </>   
     )
 }       
 
