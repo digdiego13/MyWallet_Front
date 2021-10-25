@@ -12,18 +12,19 @@ import MainButtonsComponent from "../shared/MainButtonsComponent";
 
 export default function MainPage () {
 
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
     const [box, setBox] = useState([]);
     const [loading, setLoading] = useState(true);
+    const history = useHistory();
 
 
     function totalCalculation () {
         let total = 0;
-
         box.map(item => {
-           total+= item.box
+            
+           total+= Number(item.box);
         })
-
+       
         return (total)
 
     }
@@ -36,6 +37,7 @@ export default function MainPage () {
             setBox(res.data);
             console.log(res.data);
             setLoading(false);
+            
         })
         .catch((err)=> {
             setLoading(false)
@@ -51,24 +53,22 @@ export default function MainPage () {
             <p>Loading</p>
         )
     }
-
-
     return (
         <>
         <SubTitleComponent text={`Hello, ${user.name.split(" ")[0]}`} icon={true}></SubTitleComponent>
         <WhiteBoardStyle>
-            <BoxListStyle>
+            <ul>
                 {box.map(item => {
                     return(
                         <ItemComponent item={item}></ItemComponent>
                     )
                 })}
-            </BoxListStyle>
-            <TotalStyle>
-                <p>Total:</p>
-                <TotalBoxStyle isProfit={true}>{Math.abs(totalCalculation()).toFixed(2)}</TotalBoxStyle>
-            </TotalStyle>
+            </ul>
         </WhiteBoardStyle>
+        <TotalStyle>
+                <p>Total:</p>
+                <TotalBoxStyle isProfit={totalCalculation() > 0? true : false}>{totalCalculation().toFixed(2)}</TotalBoxStyle>
+            </TotalStyle>
         <ButtonsSpacStyle>
             <MainButtonsComponent type={'entrada'}></MainButtonsComponent>
             <MainButtonsComponent type={'saida'}></MainButtonsComponent>
@@ -79,30 +79,30 @@ export default function MainPage () {
 
 const WhiteBoardStyle = styled.div`
     background-color: white;
-    border-radius: 5px;
     padding: 20px;
     margin: auto;
     font-size: 20px;
-    height: calc(65vh - 30px);
-    position:relative;
-`
-const BoxListStyle = styled.ul`
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: calc(65vh - 100px);
     overflow-y: scroll;
+    scroll-behavior: smooth;
 `
+
 
 const TotalStyle = styled.div`
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    position:absolute;
     padding:20px 20px;
-    bottom:0px;
-    right: 0px;
-    left: 0px;
+    background-color:white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size:20px;
     
 `
 const TotalBoxStyle = styled.p`
-    color: ${props => props.isProfit? 'green' : 'red'}
+    color: ${props => props.isProfit? 'green' : 'red'};
 `
 
 const ButtonsSpacStyle = styled.div`

@@ -18,19 +18,19 @@ const SignUpOrLoginInputStyled = styled.input`
 `
 
 const SignUpOrLoginButtonStyled = styled.button`
-    background-color: #1877F2;
+    background-color: ${props => props.back === 'login'? `#1877F2`: `${props.back}`};
     height: 65px;
     border: none;
     border-radius: 6px;
     margin-bottom: 13px;
-    width: 100%;
+    width:  ${props => props.width === 'login'? `100%`: '48%'};
     font-family: 'Oswald', sans-serif;
     font-size: 27px;
     font-weight: 700;
-    color: #FFF;
+    color: ${props => props.back === 'login'? `#FFF`: 'black'};
     &:hover{
         cursor: pointer;
-        filter: brightness(1.2);
+        filter: brightness(1.5);
     }
     
 `

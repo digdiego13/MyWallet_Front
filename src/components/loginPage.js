@@ -73,9 +73,12 @@ export default function LoginPage() {
                 />
                 <SignUpOrLoginButtonStyled 
                 type="submit" 
+                back={'login'}
+                color= {'login'}
+                width ={'login'}
                 disabled={isLoading ? true : false}>
                     Log In
-                </SignUpOrLoginButtonStyled>
+                </SignUpOrLoginButtonStyled >
                 <Link to={'/sign-up'} style={{textDecoration: 'none'}}>
                     <SwitchSignUpLoginLinkStyled>
                         First time? Create an account!

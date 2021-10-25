@@ -19,8 +19,13 @@ export default function ItemComponent({item}) {
 
     return(
         <ItemStyle>
-            <DataStyle>{newDateFormat}</DataStyle>
-            <descriptionStyle>{description}</descriptionStyle>
+            <div>
+                <DataStyle>{newDateFormat}</DataStyle>
+                
+                <DescriptionStyle>
+                    <p>{description}</p>
+                </DescriptionStyle>
+            </div>
             <BoxStyle isProfit={isProfit}>{Math.abs(box).toFixed(2)}</BoxStyle>
         </ItemStyle>
     )
@@ -30,16 +35,30 @@ const ItemStyle = styled.li`
     display: flex;
     margin: 10px 0px;
     justify-content: space-between;
+    
+
+    div{
+        display: flex;
+        gap:18px;
+        
+        
+    }
 `
 
 const DataStyle = styled.p`
     color: gray;
 `
 
-const DescriptionStyle = styled.p`
+const DescriptionStyle = styled.div`
     color: black;
+    white-space: nowrap;
+    overflow-x: scroll;
+    max-width: 25vw;
+    
+    
+    
 `
 
 const BoxStyle = styled.p`
-    color: ${props => props.isProfit? "green" : "false"}
+    color: ${props => props.isProfit? "green" : "red"}
 `

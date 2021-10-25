@@ -81,7 +81,12 @@ export default function SignUpPage() {
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                     required
                 />
-                <SignUpOrLoginButtonStyled type="submit" disabled={isLoading ? true : false}>
+                <SignUpOrLoginButtonStyled 
+                type="submit" 
+                disabled={isLoading ? true : false}
+                back={'login'}
+                color= {'login'}
+                width ={'login'}>
                     Sign Up
                 </SignUpOrLoginButtonStyled>
                 <Link to={'/'} style={{textDecoration: 'none'}}>

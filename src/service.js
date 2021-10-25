@@ -22,9 +22,17 @@ function loadBoxServer (token){
     return promise;
 }
 
+function newTransaction (type, token, body){
+    const promise = axios.post(`${URL}/cash/${type}`,body, createHeaders(token));
+    return promise;
+}
+
+
+
 
 export {
     postLogin,
     postSignUp,
-    loadBoxServer
+    loadBoxServer,
+    newTransaction
 }

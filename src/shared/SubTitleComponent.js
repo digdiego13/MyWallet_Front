@@ -2,16 +2,24 @@ import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 import { FiLogOut } from "react-icons/fi";
+import { useHistory } from "react-router";
 
 
 export default function SubTitleComponent({text, icon}) {
 
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+    const history = useHistory();
+
+    function logOut () {
+        localStorage.clear()
+        setUser({})
+        history.push('/');
+    }
     
     return(
         <SubTitleStyle>
             <h2>{text}</h2>
-            {icon? <FiLogOut></FiLogOut> : ""}
+            {icon? <FiLogOut onClick={logOut}></FiLogOut> : ""}
         </SubTitleStyle>
     )
 }
